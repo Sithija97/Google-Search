@@ -1,28 +1,20 @@
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import Results from "./results";
 
-import { Results } from './Results';
+const Routes = () => {
+  return (
+    <div className="p-4">
+      <Switch>
+        <Route exact path="/">
+          <Redirect to="/search" />
+        </Route>
+        <Route path={["/search", "/images", "/news", "/videos"]}>
+          <Results />
+        </Route>
+      </Switch>
+    </div>
+  );
+};
 
-export const Routes = () => (
-  <div className="p-4">
-    <Switch>
-      <Route exact path="/">
-        <Redirect to="/search" />
-      </Route>
-      <Route exact path="/search">
-        <Results />
-      </Route>
-      <Route path="/images">
-        <Results />
-      </Route>
-      <Route path="/news">
-        <Results />
-      </Route>
-      <Route path="/videos">
-        <Results />
-      </Route>
-
-    </Switch>
-  </div>
-
-);
+export default Routes;

@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDebounce } from 'use-debounce';
+import React, { useEffect, useState } from "react";
+import { useDebounce } from "use-debounce";
+import Links from "./links";
+import { useResultContext } from "../context/resultContextProvider";
 
-import { useStateContext } from '../contexts/StateContextProvider';
-import { Links } from './Links';
-
-export const Search = () => {
-  const { setSearchTerm } = useStateContext();
-  const [text, setText] = useState('Elon Musk');
+const Search = () => {
+  const [text, setText] = useState("");
   const [debouncedValue] = useDebounce(text, 300);
+  const { setSearchTerm } = useResultContext();
 
   useEffect(() => {
     if (debouncedValue) setSearchTerm(debouncedValue);
@@ -22,8 +21,12 @@ export const Search = () => {
         placeholder="🔎 Search Google or type URL"
         onChange={(e) => setText(e.target.value)}
       />
-      {text !== '' && (
-        <button type="button" className="absolute top-1.5 right-4 text-2xl text-gray-500 " onClick={() => setText('')}>
+      {text !== "" && (
+        <button
+          type="button"
+          className="absolute top-1.5 right-4 text-2xl text-gray-500 "
+          onClick={() => setText("")}
+        >
           x
         </button>
       )}
@@ -31,3 +34,5 @@ export const Search = () => {
     </div>
   );
 };
+
+export default Search;
